@@ -10,5 +10,5 @@ If you want any information about the project message me on [twitter](https://tw
 - [ ] More Readable (just like man page in linux look same in windows if possible)
 - [x] Make a summary function
 - [ ] Add titles too
-- [ ] font size
+- [ ] font style
 - [x] make setup.py
