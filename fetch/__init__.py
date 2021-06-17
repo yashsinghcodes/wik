@@ -1,3 +1,1 @@
-name = "getinfo"
-
-__all__ = ["getinfo","main"]
+from fetch import *
