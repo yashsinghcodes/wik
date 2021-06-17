@@ -6,9 +6,9 @@ If you want any information about the project message me on [I'm an inline-style
 # TO-DO
 - [x] Remove sup tags
 - [x] add search feature
-- [ ] Write a file for all arguments and write a help page
+- [x] Write a file for all arguments and write a help page
 - [ ] More Readable (just like man page in linux look same in windows if possible)
-- [ ] Make a summary function
+- [x] Make a summary function
 - [ ] Add titles too
 - [ ] font size
-- [ ] make setup.py
+- [x] make setup.py
