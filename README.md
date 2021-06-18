@@ -7,7 +7,7 @@ If you want any information about the project message me on [twitter](https://tw
 - [x] Remove sup tags
 - [x] add search feature
 - [x] Write a file for all arguments and write a help page
-- [ ] More Readable (just like man page in linux look same in windows if possible)
+- [ ] More Readable
 - [x] Make a summary function
 - [ ] Add titles too
 - [x] font style
