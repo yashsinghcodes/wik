@@ -1,7 +1,0 @@
-soupsieve>1.2
-
-[html5lib]
-html5lib
-
-[lxml]
-lxml
