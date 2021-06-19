@@ -14,7 +14,7 @@ with open("README.md","r") as f:
 
 setuptools.setup(
     name = "yashsinghcodes",
-    version = "1.0.0",
+    version = __version__,
     author = "Yash Singh",
     author_email = "yash9vardhan@gmail.com",
     description = "Fetch is use to get information about anything on the shell using Wikipedia",
@@ -22,12 +22,19 @@ setuptools.setup(
     long_description_content_type = "text/markdown",
     url = "https://github.com/yashsinghcodes/fetch",
     packages = setuptools.find_packages(),
-    classifiers = [
+    entry_points={
+        'console_scripts': [
+            'fetch=fetch.fetch:arguments',
+        ]
+    },
+    python_requires='>=3.*',
+    classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ],
-    python_requires='>=3.*',
-    install_requires = req_pkgs,
-    setup_requires = req_pkgs
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Console",
+        ],
+    install_requires=req_pkgs,
+    setup_requires=req_pkgs,
 )

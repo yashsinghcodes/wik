@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
-import info
-
+from fetch import info
+import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s","--search",help="Search any topic")
