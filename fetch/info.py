@@ -12,7 +12,6 @@ from requests.api import get
 [x] make summary function
 [x] More Readable
 [x] Write all argument file
-[ ] Add Tile in complete text
 [ ] Enjoy It
 
 """

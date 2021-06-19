@@ -16,5 +16,3 @@ def arguments():
         info.getInfo(a.info)
     if a.quick:
         info.getSummary(a.quick)
-
-arguments()
