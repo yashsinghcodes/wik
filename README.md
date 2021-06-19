@@ -12,4 +12,5 @@ If you want any information about the project message me on [twitter](https://tw
 - [ ] Add titles too
 - [x] font style
 - [ ] Write Readme.md
+- [ ] Fix CL arguments
 - [x] make setup.py
