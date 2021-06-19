@@ -1,16 +1,11 @@
 # Fetch
+Fetch is Command Line wikipedia which use web scraping of wikipedia to fetch data and show it to you on one command with fetch searcing any thing becomes too easy and fast.
 
-## Currently Under Development
-If you want any information about the project message me on [twitter](https://twitter.com/yashwastaken) or [email](mailto:yash9vardhan@gmail.com)
+## Install
+**Fetch is os indpendent you just need python install in your computer.**
 
-# TO-DO
-- [x] Remove sup tags
-- [x] add search feature
-- [x] Write a file for all arguments and write a help page
-- [x] More Readable
-- [x] Make a summary function
-- [ ] Add titles too
-- [x] font style
-- [ ] Write Readme.md
-- [ ] Fix CL arguments
-- [x] make setup.py
+To intall fetch in your computer just run the following command:
+![carbon (1)](https://user-images.githubusercontent.com/32360914/122646573-6c975780-d13d-11eb-9fc3-5228decb1bb1.png)
+
+
+### It's currently under development so your contributions for any new features will be appreciated
