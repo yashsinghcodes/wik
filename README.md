@@ -13,7 +13,11 @@
 <br/>
   <a href="https://www.python.org/"><img src=http://ForTheBadge.com/images/badges/made-with-python.svg></a>
   
-  DONATION LINK
+  <p>
+  <a href="https://ko-fi.com/yashsingh"><img src="https://raw.githubusercontent.com/adi1090x/files/master/other/kofi.png" alt="Support me on ko-fi"></a>
+  </p>
+  
+  
   ### \[[Why This?](#why-this)] \[[Support the Project](#support-the-project)] \[[Installation](#installation)] \[[Configuration](#configuration)]
   <br>
  </div>
