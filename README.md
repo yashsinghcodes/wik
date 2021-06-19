@@ -7,8 +7,10 @@ If you want any information about the project message me on [twitter](https://tw
 - [x] Remove sup tags
 - [x] add search feature
 - [x] Write a file for all arguments and write a help page
-- [ ] More Readable
+- [x] More Readable
 - [x] Make a summary function
 - [ ] Add titles too
 - [x] font style
+- [ ] Write Readme.md
+- [ ] Fix CL arguments
 - [x] make setup.py
