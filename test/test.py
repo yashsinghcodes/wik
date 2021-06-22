@@ -3,10 +3,17 @@ import unittest
 import sys
 from fetch import info
 
+<<<<<<< HEAD
 class FetchTest(unittest.TestCase):
     def getSummary(self):
         result = info.getSummary('Linux')
         self.assertEqual(result,"""-------------------------------------------------------Linux--------------------------------------------------------
+=======
+"""
+TO-DO
+[ ] Write Test Cases for fetch
+"""
+>>>>>>> ab93bc5976967db23ebf60fecb8f4112e70638e9
 
 
 Linux (/ˈlinʊks/ (listen) LEEN-uuks or /ˈlɪnʊks/ LIN-uuks) is a family of open-source Unix-like operating systems based on the Linux kernel, an operating system kernel first released on September 17, 1991, by Linus Torvalds. Linux is typically packaged in a Linux distribution.
