@@ -4,7 +4,9 @@ from sys import version
 import setuptools
 
 req_pkgs = [
-    'bs4'
+    'bs4',
+    'requests',
+    'wheel'
 ]
 
 exec(open("fetch/__version__.py").read())
