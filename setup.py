@@ -15,7 +15,7 @@ with open("README.md","r") as f:
 
 setuptools.setup(
     name = "yashsinghcodes",
-    version = __version__,
+    version = 1,
     author = "Yash Singh",
     author_email = "yash9vardhan@gmail.com",
     description = "Fetch is use to get information about anything on the shell using Wikipedia",
