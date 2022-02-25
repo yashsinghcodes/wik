@@ -9,9 +9,11 @@ from requests.api import get
 
 try:
     width,height = os.get_terminal_size()
+    p = True
 except OSError:
     width = 120
     height = 80
+    p = False
 
 class color:
     PURPLE = '\033[95m'
@@ -65,11 +67,15 @@ def getInfo(term):
         final_content.append(data)
     if "may refer to:" in str(final_content[0]): term = searchInfo(term)
     else:
-        print('\n'+(color.BOLD+str(term)).center(width,"-")+color.END+'\n')
+        if p == True:
+            print('\n'+(color.BOLD+str(term)).center(width,"-")+color.END+'\n')
+        if p == False:
+            print('\n'+str(term).center(width,"-"))
         for i in final_content:
             if i == "\n": pass
-            else: print(color.YELLOW+"[-] "+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
-
+            else:
+                if p == True: print(color.YELLOW+"[-] "+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
+                else: print("[-]"+str(i))
 def searchInfo(term):
     final_content = []
     content = req(term)
