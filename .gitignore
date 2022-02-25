@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+pip-log.txt
+*.manifest
+*.spec
+__pypackages__/
+
