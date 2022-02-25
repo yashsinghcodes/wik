@@ -9,7 +9,6 @@ req_pkgs = [
     'wheel'
 ]
 
-exec(open("fetch/__version__.py").read())
 
 with open("README.md","r") as f:
     long_description = f.read()
