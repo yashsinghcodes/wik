@@ -30,7 +30,9 @@ class color:
 colors = ['\033[92m','\033[95m','\033[96m','\033[94m','\033[36m']
 
 def req(term):
-    r = requests.get("https://en.m.wikipedia.org/wiki/"+term)
+    global wikiurl 
+    wikiurl = "https://en.m.wikipedia.org/wiki/"+term
+    r = requests.get(wikiurl)
     return r.text
 
 def getSummary(term):
@@ -69,8 +71,10 @@ def getInfo(term):
     else:
         if p == True:
             print('\n'+(color.BOLD+str(term)).center(width,"-")+color.END+'\n')
+            print(color.BLUE+str(wikiurl).center(width," ")+color.END+'\n')
         if p == False:
             print('\n'+str(term).center(width,"-"))
+            print('\n'+str(wikiurl).center(width, " ")+'\n')
         for i in final_content:
             if i == "\n": pass
             else:
