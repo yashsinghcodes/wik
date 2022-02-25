@@ -6,16 +6,13 @@ from bs4 import BeautifulSoup
 import random
 
 from requests.api import get
-# TO-DO
-"""
-[x] make a req function 
-[x] make summary function
-[x] More Readable
-[x] Write all argument file
-[ ] Enjoy It
 
-"""
-width,height = os.get_terminal_size()
+try:
+    width,height = os.get_terminal_size()
+except OSError:
+    width = 120
+    height = 80
+
 class color:
     PURPLE = '\033[95m'
     CYAN = '\033[96m'
