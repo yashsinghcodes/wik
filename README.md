@@ -52,7 +52,7 @@
 1. Install `setuptools` if it isn't already:
 
     ```console
-     pip install setuptools
+     pip3 install setuptools
      ```
  >Note: For Linux use pip3
 1. Clone this repo:
