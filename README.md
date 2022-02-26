@@ -49,10 +49,10 @@
 ## Installation
 
 
-1. Install `setuptools` if it isn't already:
+1. Install `flit_core` if it isn't already:
 
     ```console
-     pip3 install setuptools
+     pip3 install flit_core
      ```
  >Note: For Linux use pip3
 1. Clone this repo:
@@ -61,11 +61,11 @@
     git clone https://github.com/yashsinghcodes/fetch.git   
     ```
 
-1. Move into the `fetch` directory and run the `setup.py` script:
+1. change the directory to fetch and run following command:
 
     ```console
     cd fetch
-    python setup.py install
+    pip install .
     ```
  >Note: For Linux use python3 as it required python 3 or higher
 
