@@ -5,7 +5,7 @@ import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s","--search",help="Search any topic")
-parser.add_argument("-i","--info",help="Get info on any topic (use correct name)")
+parser.add_argument("-i","--info",help="Get info on any topic")
 parser.add_argument("-q","--quick",help="Get the summary on any topic")
 
 a = parser.parse_args()
