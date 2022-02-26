@@ -6,7 +6,6 @@ It let you search for any wikipedia up to date article on one query to your term
 
   ### \[[Installation](#installation)] \[[Options](#options)] \[[Examples](#example)] \[[Contribution](#contribution)]
 
-<br>
 </div>
 
 ## Requirements
@@ -24,7 +23,6 @@ git clone https://github.com/yashsinghcodes/wik.git
 cd wik
 sudo pip3 install .
 ```
-<br>
 
 ##### PYPI
 ```bash
