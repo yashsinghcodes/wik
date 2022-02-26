@@ -22,7 +22,7 @@ dependencies = ["beautifulsoup4", "requests"]
 Home = "https://github.com/yashsinghcodes/wik"
 
 [project.scripts]
-fetch = "fetch.fetch:arguments"
+fetch = "wik.wik:arguments"
 
 [project.optional-dependencies]
 dev = ["flit"]
