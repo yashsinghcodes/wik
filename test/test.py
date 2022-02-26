@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import unittest
 import sys
-from fetch import info
+from wik import info
 
 class FetchTest(unittest.TestCase):
     def getSummary(self):
