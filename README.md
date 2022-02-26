@@ -17,6 +17,7 @@ It let you search for any wikipedia up to date article on one query to your term
 
 #### Linux
 
+##### From Source
 ```bash
 sudo pip3 install beautifulsoup4 flit_core
 git clone https://github.com/yashsinghcodes/wik.git
@@ -25,7 +26,14 @@ sudo pip3 install .
 ```
 <br>
 
+##### PYPI
+```bash
+sudo pip3 install wik
+```
+
 #### Windows
+
+##### From Source
 
 ```
 pip install beautifulsoup4 flit_core
@@ -34,6 +42,11 @@ cd wik
 pip install .
 ```
 >Note: Windows users should have added python to there environment variable
+
+##### PYPI
+```
+pip install wik
+```
 
 ## Options
 Using wik is acutally really simple.
