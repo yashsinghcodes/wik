@@ -39,7 +39,7 @@ colors = ['\033[92m','\033[95m','\033[96m','\033[94m','\033[36m']
 # Makes request to wikipedia for the code
 def req(term):
     global wikiurl 
-    wikiurl = "https://en.m.wikipedia.org/wiki/"+term
+    wikiurl = "https://en.wikipedia.org/wiki/"+term
     r = requests.get(wikiurl)
     return r.text
 
@@ -122,19 +122,29 @@ def getInfo(term):
                          print(color.BOLD+colors[random.randrange(len(colors)-1)]+i[1:]+color.END+color.END)
                          print("-"*(len(i)+1))
                     else:   
-                        print(color.YELLOW+'[-] '+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
+                        if "Other reasons this message may be displayed:" in i:searchInfo(term)
+                        else: print(color.YELLOW+'[-] '+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
                 else: print(str(i)+'\n')
 
 
 # Search for Similar Articles
 def searchInfo(term):
     final_content = []
-    content = req(term)
-    soup = BeautifulSoup(content,'html.parser')
-    content = soup.find_all('a')
-    for i in content:
-        if i.get('title') == i.get_text():
-            final_content.append(i.get_text())
-    final_content = final_content[2:]
-    print("Did You Mean: \n")
-    print(*final_content,sep ="\n")
+    r = requests.get("https://en.wikipedia.org/w/index.php?search="+term)
+    if '/wiki/' in r.url:
+        getInfo(term)
+    else:
+        content = r.text
+        soup = BeautifulSoup(content,'html.parser')
+        content = soup.find_all('a')
+        did = soup.find('a',{'id':'mw-search-DYM-suggestion'})
+        for i in content:
+            if i.get('title') == i.get_text():
+                final_content.append(i.get_text())
+        final_content = final_content[2:]
+        print("Did You Mean: \n")
+        if did is not None:
+            print(did.get_text())
+            print(*final_content[:5],sep ="\n")
+        else:
+            print(*final_content[:5],sep="\n")
