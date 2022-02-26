@@ -18,20 +18,20 @@ It let you search for any wikipedia up to date article on one query to your term
 #### Linux
 
 ```bash
-sudo pip3 install bs4 setuptools
+sudo pip3 install beautifulsoup4 flit_core
 git clone https://github.com/yashsinghcodes/wi.git
 cd wi
-sudo python3 setup.py install
+sudo pip3 install .
 ```
 <br>
 
 #### Windows
 
 ```
-pip install bs4 setuptools
+pip install beautifulsoup4 flit_core
 git clone https://github.com/yashsinghcodes/wi.git
 cd wi
-python setup.py install
+pip install .
 ```
 >Note: Windows users should have added python to there environment variable
 
