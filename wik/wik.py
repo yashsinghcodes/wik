@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import argparse
-from fetch import info
+from wik import info
 import sys
 
 parser = argparse.ArgumentParser()
