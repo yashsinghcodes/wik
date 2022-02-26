@@ -1,5 +1,5 @@
-# WI
-wi is command based wiki. 
+# WIK
+wik is command based wiki. 
 It let you search for any wikipedia up to date article on one query to your terminal.
 
 <div align="center">
@@ -19,8 +19,8 @@ It let you search for any wikipedia up to date article on one query to your term
 
 ```bash
 sudo pip3 install beautifulsoup4 flit_core
-git clone https://github.com/yashsinghcodes/wi.git
-cd wi
+git clone https://github.com/yashsinghcodes/wik.git
+cd wik
 sudo pip3 install .
 ```
 <br>
@@ -29,17 +29,17 @@ sudo pip3 install .
 
 ```
 pip install beautifulsoup4 flit_core
-git clone https://github.com/yashsinghcodes/wi.git
-cd wi
+git clone https://github.com/yashsinghcodes/wik.git
+cd wik
 pip install .
 ```
 >Note: Windows users should have added python to there environment variable
 
 ## Options
-Using wi is acutally really simple.
+Using wik is acutally really simple.
 
 ```
-usage: wi [-h] [-s SEARCH] [-i INFO] [-q QUICK]
+usage: wik [-h] [-s SEARCH] [-i INFO] [-q QUICK]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -59,5 +59,5 @@ requests, if you think you can fix somthing or make improvment on the code. If y
 ideas related to the project you can [contact me](https://yashwastaken.xyz/contact).
 
 ### Want to work with me?
-This is the task [list](https://trello.com/b/ZW0eYT62/wi) if you think you can implement any please make a pull request.
+This is the task [list](https://trello.com/b/ZW0eYT62/wik) if you think you can implement any please make a pull request.
 >Note: Do things which are under To-do do not make a pull request for tasks which are already under development.
