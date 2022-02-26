@@ -16,7 +16,7 @@ classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Environment :: Console"
 ]
-dependencies = ["beautifulsoup4", "requests"]
+dependencies = ["bs4", "requests"]
 
 [project.urls]
 Home = "https://github.com/yashsinghcodes/fetch"
