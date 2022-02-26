@@ -51,7 +51,17 @@ optional arguments:
 ```
 
 ## Example
-Insert carbon images here
+
+```bash
+$ wik -i Linux
+```
+![carbon (6)](https://user-images.githubusercontent.com/32360914/155836508-63c7424f-b7d6-4871-a170-e2f0fdd6617d.png)
+
+```bash
+$ wik -q Linux
+```
+![carbon (7)](https://user-images.githubusercontent.com/32360914/155836565-281eb678-9605-4131-a6c9-9a6c871bdc77.png)
+
 
 ## Contribution
 You can contribute to the project by opening a issue if you face any or making a pull
