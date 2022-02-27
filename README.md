@@ -73,6 +73,11 @@ $ wik -q Linux
 ```
 ![carbon (7)](https://user-images.githubusercontent.com/32360914/155836565-281eb678-9605-4131-a6c9-9a6c871bdc77.png)
 
+```
+$ wik -i Linux -l br
+```
+![lang](https://user-images.githubusercontent.com/32360914/155878486-e46c909d-4373-4cae-8ada-3d6df8545a96.png)
+
 
 ## Contribution
 You can contribute to the project by opening a issue if you face any or making a pull
