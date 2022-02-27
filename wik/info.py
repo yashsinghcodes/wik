@@ -37,16 +37,16 @@ colors = ['\033[92m','\033[95m','\033[96m','\033[94m','\033[36m']
 ##    yield from get_tags(i, params)
 
 # Makes request to wikipedia for the code
-def req(term):
+def req(term,lang="en"):
     global wikiurl 
-    wikiurl = "https://en.wikipedia.org/wiki/"+term
+    wikiurl = "https://"+lang+".wikipedia.org/wiki/"+term
     r = requests.get(wikiurl)
     return r.text
 
 # Gets summary
-def getSummary(term):
+def getSummary(term,lang="en"):
     final_content = []
-    content = req(term)
+    content = req(term,lang)
     soup = BeautifulSoup(content,'html.parser')
     content = soup.find_all('p')
     # prints the title in the center
@@ -73,9 +73,9 @@ def getSummary(term):
         print(color.END)
 
 
-def getInfo(term):
+def getInfo(term,lang="en"):
     final_content = []
-    content = req(term)
+    content = req(term,lang)
     soup = BeautifulSoup(content,'html.parser')
     content = []
     # Seprating Titles from the paragraphs
@@ -128,9 +128,9 @@ def getInfo(term):
 
 
 # Search for Similar Articles
-def searchInfo(term):
+def searchInfo(term,lang="en"):
     final_content = []
-    r = requests.get("https://en.wikipedia.org/w/index.php?search="+term)
+    r = requests.get("https://"+lang+".wikipedia.org/w/index.php?search="+term)
     if '/wiki/' in r.url:
         getInfo(term)
     else:
