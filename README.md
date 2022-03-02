@@ -1,6 +1,6 @@
 # WIK
-wik is command based wiki. 
-It let you search for any wikipedia up to date article on one query to your terminal.
+wik is a tool to view wikipedia pages from your terminal.
+It also let you search for any wikipedia up to date article on one query from your terminal.
 
 <div align="center">
 
