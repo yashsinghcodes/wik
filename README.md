@@ -60,7 +60,7 @@ optional arguments:
   -q QUICK, --quick QUICK
                         Get the summary on any topic
   -l LANG, --lang LANG  Get info in your native language (default english)
-  -x, --rand            Get random Wikipedia articl
+  -x, --rand            Get random Wikipedia article
 ```
 
 ## Example
