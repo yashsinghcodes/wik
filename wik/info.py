@@ -126,6 +126,73 @@ def getInfo(term,lang="en"):
                         else: print(color.YELLOW+'[-] '+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
                 else: print(str(i)+'\n')
 
+def getRand(lang="en"):
+    """
+    gerRand() retrieves a random article from Wikipedia.
+
+    :@param term {string}: String name of article to retreive. Set to Special:Random to retreive random article.
+    :@param lang {string}: Language to retreive article in.
+    :@return     {string}: Returns formatted Wikipedia article string.
+    """
+
+    final_content = []
+
+    # still use var term so we can use existing req() function
+    term = "Special:Random"
+    content = req(term, lang)
+    soup = BeautifulSoup(content, 'html.parser')
+    content = []
+
+    # get title of article and strip "- Wikipedia" and right whitespace
+    for title in soup.find_all('title'):
+        title = title.get_text().split('-', 1)
+        title = title[0].rstrip()
+
+    # print article title
+    print('\n'+(color.BOLD+str(title)).center(width, "-")+color.END+'\n')
+
+    # Seprating section titles from the paragraphs
+    for a in soup.find_all(['p', 'span']):
+        try:
+            if a['class'] and 'mw-headline' in a['class']:
+                content.append(a)
+        except KeyError:
+            if a.name == 'p':
+                content.append(a)
+
+    # Remove all external links
+    for i in content:
+        if i('sup'):
+            for tag in i('sup'):
+                tag.decompose()
+
+        # Getting data
+        data = i.get_text()
+        if i.name == 'span':
+            final_content.append('!'+str(data))  # Seprating titles
+        else:
+            final_content.append(data)
+
+    # Printing the output
+    for i in final_content:
+        if i == "\n":
+            continue
+        if i in ["!See also", "!Notes", "!References", "!External links", "!Further reading"]:
+            continue
+        else:
+            if p == True:
+                if str(i[0]) == '!':
+                    print(
+                        color.BOLD+colors[random.randrange(len(colors)-1)]+i[1:]+color.END+color.END)
+                    print("-"*(len(i)+1))
+                else:
+                    if "Other reasons this message may be displayed:" in i:
+                        searchInfo(term)
+                    else:
+                        print(
+                            color.YELLOW+'[-] '+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
+            else:
+                print(str(i)+'\n')
 
 # Search for Similar Articles
 def searchInfo(term,lang="en"):
