@@ -217,7 +217,7 @@ def searchInfo(term, lang="en", called=False):
         soup = BeautifulSoup(content,'html.parser')
         content = soup.find_all('a',{'data-serp-pos': True})
         dym = soup.find('em')
+        if called == False: print("Result: \n")
         for i in content:
-            if called == False: print("Result: \n")
-            if dym != []: print(dym.get_text())
+            if dym != None: print(dym.get_text())
             print(i.get('title'))
