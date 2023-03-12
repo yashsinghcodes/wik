@@ -85,7 +85,3 @@ $ wik -i Linux -l br
 You can contribute to the project by opening a issue if you face any or making a pull
 requests, if you think you can fix somthing or make improvment on the code. If you have some
 ideas related to the project you can [contact me](https://yashwastaken.xyz/contact).
-
-### Want to work with me?
-This is the task [list](https://trello.com/b/ZW0eYT62/wik) if you think you can implement any please make a pull request.
->Note: Do things which are under To-do do not make a pull request for tasks which are already under development.
