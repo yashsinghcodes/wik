@@ -61,12 +61,13 @@ def getSummary(term,lang="en"):
             
             data = i.get_text()
             final_content.append(data)
-            if len(final_content) == 3: break # Breaks after 3 line of content
+            if len(final_content) == 3: 
+                break # Breaks after 3 line of content
     
     # Search for other if not available
-    if "may refer to:" in str(i):
-        print("Did You Mean: ")
-        term = searchInfo(term)
+    if "Other reasons this message may be displayed" in str(i):
+        print('Did you mean: ')
+        term = searchInfo(term,called=True)
     else:
         print(colors[random.randrange(len(colors)-1)]) 
         print(*final_content,sep = '\n\n')
@@ -94,16 +95,19 @@ def getInfo(term,lang="en"):
     # Remove all external links
     for i in content:
         if i('sup'):
-            for tag in i('sup'): tag.decompose()
+            for tag in i('sup'): 
+                tag.decompose()
 
         # Getting data    
         data = i.get_text()
         if i.name == 'span': 
             final_content.append('!'+str(data)) # Seprating titles
-        else: final_content.append(data)
+        else: 
+            final_content.append(data)
 
     # Search if not found
-    if "may refer to:" in str(final_content[0]): term = searchInfo(term)
+    if "may refer to:" in str(final_content[0]): 
+        term = searchInfo(term)
 
     # Printing the output
     else:
@@ -114,17 +118,23 @@ def getInfo(term,lang="en"):
             print('\n'+str(term).center(width,"-"))
             print('\n'+str(wikiurl).center(width, " ")+'\n')
         for i in final_content:
-            if i == "\n": continue
-            if i in ["!See also","!Notes","!References","!External links","!Further reading"]: continue
+            if i == "\n": 
+                continue
+            if i in ["!See also","!Notes","!References","!External links","!Further reading"]: 
+                continue
             else:
                 if p == True:
                     if str(i[0]) == '!':
                          print(color.BOLD+colors[random.randrange(len(colors)-1)]+i[1:]+color.END+color.END)
                          print("-"*(len(i)+1))
                     else:   
-                        if "Other reasons this message may be displayed:" in i:searchInfo(term)
-                        else: print(color.YELLOW+'[-] '+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
-                else: print(str(i)+'\n')
+                        if "Other reasons this message may be displayed:" in i:
+                            searchInfo(term)
+                        else: 
+                            print(color.YELLOW+'[-] '+color.END+colors[random.randrange(len(colors)-1)]+i+"\n"+color.END)
+                else: 
+                    print(str(i)+'\n')
+
 
 def getRand(lang="en"):
     """
@@ -194,24 +204,20 @@ def getRand(lang="en"):
             else:
                 print(str(i)+'\n')
 
+
 # Search for Similar Articles
-def searchInfo(term,lang="en"):
+def searchInfo(term, lang="en", called=False):
     final_content = []
-    r = requests.get("https://"+lang+".wikipedia.org/w/index.php?search="+term)
+    # https://en.wikipedia.org/w/index.php?fulltext=Search&search
+    r = requests.get("https://"+lang+".wikipedia.org/w/index.php?fulltext=Search&search="+term)
     if '/wiki/' in r.url:
         getInfo(term)
     else:
         content = r.text
         soup = BeautifulSoup(content,'html.parser')
-        content = soup.find_all('a')
-        did = soup.find('a',{'id':'mw-search-DYM-suggestion'})
+        content = soup.find_all('a',{'data-serp-pos': True})
+        dym = soup.find('em')
         for i in content:
-            if i.get('title') == i.get_text():
-                final_content.append(i.get_text())
-        final_content = final_content[2:]
-        print("Did You Mean: \n")
-        if did is not None:
-            print(did.get_text())
-            print(*final_content[:5],sep ="\n")
-        else:
-            print(*final_content[:5],sep="\n")
+            if called == False: print("Result: \n")
+            if dym != []: print(dym.get_text())
+            print(i.get('title'))
