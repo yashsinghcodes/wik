@@ -11,22 +11,14 @@ parser.add_argument("-l", "--lang", help="Get info in your native language (defa
 parser.add_argument("-x", "--rand", help="Get random Wikipedia article", action='store_true')
 
 a = parser.parse_args()
-
+if not a.lang: a.lang="EN"
 
 def arguments():
-    if a.search and a.lang is None:
-        info.searchInfo(a.search)
-    if a.info and a.lang is None:
-        info.getInfo(a.info)
-    if a.quick and a.lang is None:
-        info.getSummary(a.quick)
-    if a.rand and a.lang is None:
-        info.getRand()
-    if a.quick and a.lang:
+    if a.quick:
         info.getSummary(a.quick, a.lang)
-    if a.info and a.lang:
+    if a.info:
         info.getInfo(a.info, a.lang)
-    if a.search and a.lang:
+    if a.search:
         info.searchInfo(a.search, a.lang)
-    if a.rand and a.lang:
+    if a.rand:
         info.getRand(a.lang)
