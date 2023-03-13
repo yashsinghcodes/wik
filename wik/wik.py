@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 import argparse
+
 from wik import info
-import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--search", help="Search any topic")
 parser.add_argument("-i", "--info", help="Get info on any topic")
 parser.add_argument("-q", "--quick", help="Get the summary on any topic")
-parser.add_argument("-l", "--lang", help="Get info in your native language (default english)")
-parser.add_argument("-x", "--rand", help="Get random Wikipedia article", action='store_true')
+parser.add_argument(
+    "-l", "--lang", help="Get info in your native language (default english)"
+)
+parser.add_argument(
+    "-x", "--rand", help="Get random Wikipedia article", action="store_true"
+)
 
 a = parser.parse_args()
 
