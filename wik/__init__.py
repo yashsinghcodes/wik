@@ -4,5 +4,5 @@ __version__ = "1.2.0"
 
 name = "wik"
 
-__all__ = ['wik','info']
+__all__ = ["wik", "info"]
 from wik import *
