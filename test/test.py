@@ -1,32 +1,97 @@
 #!/usr/bin/env python3
+import re
 import unittest
-from unittest.mock import patch
 from io import StringIO
+from unittest.mock import patch
+
 from wik import info
 
 
+class FakeResp:
+    def __init__(self, text, url="https://en.wikipedia.org/wiki/Test", status_code=200):
+        self.text = text
+        self.url = url
+        self.status_code = status_code
+
+
 class FetchTest(unittest.TestCase):
-    @patch('sys.stdout', new_callable=StringIO)
-    def test_getSummary(self, mock_stdout):
-        exp_result = """-----------------------------------------------------KISS_principle-----------------------------------------------------
+    def setUp(self):
+        info.set_cache_enabled(False)
 
+    def _clean(self, text):
+        ansi_escape = re.compile(r"\x1B[@-_][0-?]*[ -/]*[@-~]")
+        cleaned = ansi_escape.sub("", text)
+        return re.sub(r"\n+", "\n", cleaned).strip()
 
-KISS, an acronym for "Keep it simple, stupid!", is a design principle first noted by the U.S. Navy in 1960. First seen partly in American English by at least 1938, the KISS principle states that most systems work best if they are kept simple rather than made complicated; therefore, simplicity should be a key goal in design, and unnecessary complexity should be avoided. The phrase has been associated with aircraft engineer Kelly Johnson. The term "KISS principle" was in popular use by 1970. Variations on the phrase (usually as some euphemism for the more churlish "stupid") include "keep it super simple", "keep it simple, silly", "keep it short and simple", "keep it short and sweet", "keep it simple and straightforward", "keep it small and simple", "keep it simple, soldier", "keep it simple, sailor", "keep it simple, sweetie", "keep it stupidly simple", or "keep it sweet and simple".
-
-
-The acronym was reportedly coined by Kelly Johnson, lead engineer at the Lockheed Skunk Works (creators of the Lockheed U-2 and SR-71 Blackbird spy planes, among many others). However, the variant "Keep it Short and Simple" is attested from a 1938 issue of the Minneapolis Star.
-
-
-While popular usage has transcribed it for decades as "Keep it simple, stupid", Johnson transcribed it simply as "Keep it simple stupid" (no comma), and this reading is still used by many authors."""
+    @patch("sys.stdout", new_callable=StringIO)
+    @patch("requests.get")
+    def test_getSummary(self, mock_get, mock_stdout):
+        html = """
+        <html><body>
+        <div class="mw-parser-output">
+          <p>First paragraph.</p>
+          <p>Second paragraph.</p>
+          <p>Third paragraph.</p>
+        </div>
+        </body></html>
+        """
+        mock_get.return_value = FakeResp(html)
 
         info.getSummary("KISS_principle")
-        output = mock_stdout.getvalue()
+        output = self._clean(mock_stdout.getvalue())
 
-        import re
-        ansi_escape = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
-        cleaned_output = ansi_escape.sub('', output)
-        cleaned_output = re.sub(r'\n+', '\n', cleaned_output).strip()
-        self.assertEqual(cleaned_output, re.sub(r'\n+', '\n', exp_result).strip())
+        self.assertIn("NAME", output)
+        self.assertIn("SUMMARY", output)
+        self.assertIn("First paragraph.", output)
+        self.assertIn("Second paragraph.", output)
+        self.assertIn("Third paragraph.", output)
+
+    @patch("sys.stdout", new_callable=StringIO)
+    @patch("requests.get")
+    def test_getInfo_with_headings(self, mock_get, mock_stdout):
+        html = """
+        <html><body>
+        <div class="mw-parser-output">
+          <p>This is an accepted version of this page</p>
+          <p>Intro paragraph.</p>
+          <h2><span class="mw-headline">Origin</span></h2>
+          <p>Origin paragraph.</p>
+          <h3><span class="mw-headline">Variants</span></h3>
+          <p>Variants paragraph.</p>
+        </div>
+        </body></html>
+        """
+        mock_get.return_value = FakeResp(html)
+
+        info.getInfo("Linux")
+        output = self._clean(mock_stdout.getvalue())
+
+        self.assertIn("NAME", output)
+        self.assertIn("SOURCE", output)
+        self.assertIn("ORIGIN", output)
+        self.assertIn("VARIANTS", output)
+        self.assertIn("Intro paragraph.", output)
+        self.assertIn("Origin paragraph.", output)
+        self.assertIn("Variants paragraph.", output)
+        self.assertNotIn("accepted version", output.lower())
+
+    @patch("sys.stdout", new_callable=StringIO)
+    @patch("requests.get")
+    def test_searchInfo_results(self, mock_get, mock_stdout):
+        html = """
+        <html><body>
+        <a data-serp-pos="0" title="Linux"></a>
+        <a data-serp-pos="1" title="Linux kernel"></a>
+        </body></html>
+        """
+        mock_get.return_value = FakeResp(html, url="https://en.wikipedia.org/w/index.php?search=Linux")
+
+        info.searchInfo("Linux")
+        output = self._clean(mock_stdout.getvalue())
+
+        self.assertIn("SEARCH RESULTS", output)
+        self.assertIn("Linux", output)
+        self.assertIn("Linux kernel", output)
 
 if __name__ == '__main__':
     unittest.main()
