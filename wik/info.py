@@ -89,6 +89,7 @@ def _emit(lines, force_page=False):
                 pager = "more"
                 os.environ["PAGER"] = pager
         if "less" not in pager:
+            # Remove ANSI Escape codes
             text = re.sub(r"\x1B[@-_][0-?]*[ -/]*[@-~]", "", text)
         pydoc.pager(text)
         return
@@ -195,6 +196,7 @@ def req(term, lang="en"):
     global wikiurl
     term = term.replace(" ", "_")
     wikiurl = "https://" + lang + ".wikipedia.org/wiki/" + quote(term)
+    cache_path = ""
     if _cache_enabled and term.lower() != "special:random":
         cache_path = _cache_path(term, lang)
         if os.path.exists(cache_path):
@@ -355,8 +357,7 @@ def getRand(lang="en"):
         title = title.get_text().split("-", 1)
         title = title[0].rstrip()
 
-    lines = _title_block(str(title), link=str(wikiurl))
-
+        lines = _title_block(str(title), link=str(wikiurl))
     # Seprating section titles from the paragraphs
     content = _collect_blocks(soup)
 
@@ -434,5 +435,5 @@ def searchInfo(term, lang="en", called=False):
             title = i.get("title")
             if not title:
                 continue
-            lines.append("    " + title)
+            lines.append(f"    {title}")
         _emit(lines, force_page=True)
