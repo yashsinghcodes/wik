@@ -1,6 +1,6 @@
 # WIK
-wik is a tool to view wikipedia pages from your terminal.
-It also let you search for any wikipedia up to date article on one query from your terminal.
+WIK is a command-line tool to view Wikipedia pages from your terminal.
+It also lets you search Wikipedia articles with a single query.
 
 <div align="center">
 
@@ -39,7 +39,7 @@ git clone https://github.com/yashsinghcodes/wik.git
 cd wik
 pip install .
 ```
->Note: Windows users should have added python to there environment variable
+>Note: Windows users should add Python to their environment variables.
 
 ##### PYPI
 ```
@@ -47,10 +47,11 @@ pip install wik
 ```
 
 ## Options
-Using wik is acutally really simple.
+Using WIK is simple.
 
 ```
-usage: wik [-h] [-s SEARCH] [-i INFO] [-q QUICK] [-l LANG] [-x]
+usage: wik [-h] [-s SEARCH] [-i INFO] [-q QUICK] [-l LANG] [-x] [--no-cache]
+           [--clear-cache]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -61,6 +62,8 @@ optional arguments:
                         Get the summary on any topic
   -l LANG, --lang LANG  Get info in your native language (default english)
   -x, --rand            Get random Wikipedia article
+  --no-cache            Disable on-disk cache for this run
+  --clear-cache         Clear cached pages and exit
 ```
 
 ## Example
@@ -80,8 +83,16 @@ $ wik -i Linux -l br
 ```
 ![lang](https://user-images.githubusercontent.com/32360914/155878486-e46c909d-4373-4cae-8ada-3d6df8545a96.png)
 
+### Cache
+WIK stores pages on disk so repeated queries are instant and can work offline. You can
+disable caching per run or clear the cache:
+
+```
+wik --no-cache -i Linux
+wik --clear-cache
+```
+
 
 ## Contribution
-You can contribute to the project by opening a issue if you face any or making a pull
-requests, if you think you can fix somthing or make improvment on the code. If you have some
-ideas related to the project you can [contact me](https://yashwastaken.xyz/contact).
+You can contribute by opening an issue or making a pull request. If you have ideas or
+feedback, you can [contact me](mailto:yash9vardhan@gmail.com).

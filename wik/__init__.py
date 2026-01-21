@@ -1,6 +1,6 @@
 """wik is used to get information about anything on the shell using Wikipedia"""
 
-__version__ = "1.4.0"
+__version__ = "2.0.0"
 
 name = "wik"
 
