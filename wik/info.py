@@ -3,6 +3,8 @@ import os
 import sys
 import textwrap
 import pydoc
+import re
+import shutil
 import hashlib
 
 from urllib.parse import quote
@@ -78,6 +80,16 @@ def _should_page(text):
 def _emit(lines, force_page=False):
     text = "\n".join(lines).rstrip() + "\n"
     if _use_tty() and (force_page or _should_page(text)):
+        pager = os.environ.get("PAGER", "")
+        if not pager:
+            if shutil.which("less"):
+                pager = "less -R"
+                os.environ["PAGER"] = pager
+            else:
+                pager = "more"
+                os.environ["PAGER"] = pager
+        if "less" not in pager:
+            text = re.sub(r"\x1B[@-_][0-?]*[ -/]*[@-~]", "", text)
         pydoc.pager(text)
         return
     print(text, end="")
