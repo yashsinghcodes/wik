@@ -14,35 +14,38 @@ It also lets you search Wikipedia articles with a single query.
 
 ## Installation
 
-#### Linux
+### Linux/macOS
 
-##### From Source
+#### From source
 ```bash
-sudo pip3 install beautifulsoup4 flit_core
+python3 -m pip install beautifulsoup4 flit_core
 git clone https://github.com/yashsinghcodes/wik.git
 cd wik
-sudo pip3 install .
+python3 -m pip install .
 ```
 
-##### PYPI
+#### PyPI
 ```bash
-sudo pip3 install wik
+python3 -m pip install wik
 ```
 
-#### Windows
+### Windows
 
-##### From Source
-
-```
-pip install beautifulsoup4 flit_core
+#### From source
+```bash
+python -m pip install beautifulsoup4 flit_core
 git clone https://github.com/yashsinghcodes/wik.git
 cd wik
-pip install .
+python -m pip install .
 ```
 >Note: Windows users should add Python to their environment variables.
 
-##### PYPI
+#### PyPI
+```bash
+python -m pip install wik
 ```
+or
+```bash
 pip install wik
 ```
 
@@ -71,17 +74,7 @@ optional arguments:
 ```bash
 $ wik -i Linux
 ```
-![carbon (6)](https://user-images.githubusercontent.com/32360914/155836508-63c7424f-b7d6-4871-a170-e2f0fdd6617d.png)
-
-```bash
-$ wik -q Linux
-```
-![carbon (7)](https://user-images.githubusercontent.com/32360914/155836565-281eb678-9605-4131-a6c9-9a6c871bdc77.png)
-
-```
-$ wik -i Linux -l br
-```
-![lang](https://user-images.githubusercontent.com/32360914/155878486-e46c909d-4373-4cae-8ada-3d6df8545a96.png)
+![example output](docs/img/carbon.png)
 
 ### Cache
 WIK stores pages on disk so repeated queries are instant and can work offline. You can
