@@ -93,5 +93,29 @@ class FetchTest(unittest.TestCase):
         self.assertIn("Linux", output)
         self.assertIn("Linux kernel", output)
 
+    @patch("sys.stdout", new_callable=StringIO)
+    @patch("requests.get")
+    def test_getInfo_with_bulleted_list(self, mock_get, mock_stdout):
+        html = """
+        <html>
+        <body>
+            <div class="mw-parser-output">
+                <h2><span class="mw-headline">Cast</span></h2>
+                <ul>
+                    <li>Actor One as Role One</li>
+                    <li>Actor Two as Role Two</li>
+                </ul>
+            </div>
+        </body>
+        </html>
+        """
+        mock_get.return_value = FakeResp(html, url="https://en.wikipedia.org/wiki/Test")
+        info.getInfo("test")
+        output = self._clean(mock_stdout.getvalue())
+        self.assertIn("CAST", output)
+        self.assertIn("- Actor One as Role One", output)
+        self.assertIn("- Actor Two as Role Two", output)
+
+
 if __name__ == '__main__':
     unittest.main()

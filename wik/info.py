@@ -106,9 +106,13 @@ def _collect_blocks(soup):
         )
     else:
         root = soup
-    for el in root.find_all(["p", "h2", "h3", "h4", "h5"]):
+    for el in root.find_all(["p", "h2", "h3", "h4", "h5", "ul", "ol"]):
         if el.name == "p":
             blocks.append({"type": "para", "el": el})
+            continue
+        if el.name in ("ul", "ol"):
+            for li in el.find_all("li", recursive=False):
+                blocks.append({"type": "list_item", "el": li})
             continue
         headline = el.find("span", class_="mw-headline")
         if headline:
@@ -287,6 +291,9 @@ def getInfo(term, lang="en"):
             final_content.append(
                 {"type": "heading", "text": text, "level": i["level"]}
             )
+        elif i["type"] == "list_item":
+            if data:
+                final_content.append({"type": "list_item", "text": data})
         else:
             if _skip_para(data):
                 continue
@@ -320,13 +327,17 @@ def getInfo(term, lang="en"):
                 lines.append(_section_heading(heading, level=i["level"]))
                 lines.append("")
                 continue
-            para = i["text"]
-            if "Other reasons this message may be displayed:" in para:
-                _emit(lines)
-                searchInfo(term, lang=lang)
-                return
-            lines.extend(_format_paragraph(para))
-            lines.append("")
+            if i["type"] == "list_item":
+                lines.extend(_format_paragraph(f"- {i['text']}", indent=6))
+                lines.append("")
+            else:
+                para = i["text"]
+                if "Other reasons this message may be displayed:" in para:
+                    _emit(lines)
+                    searchInfo(term, lang=lang)
+                    return
+                lines.extend(_format_paragraph(para))
+                lines.append("")
         _emit(lines, force_page=True)
 
 
@@ -376,6 +387,9 @@ def getRand(lang="en"):
             final_content.append(
                 {"type": "heading", "text": text, "level": i["level"]}
             )
+        elif i["type"] == "list_item":
+            if data:
+                final_content.append({"type": "list_item", "text": data})
         else:
             if _skip_para(data):
                 continue
@@ -395,6 +409,10 @@ def getRand(lang="en"):
                 continue
             lines.append("")
             lines.append(_section_heading(heading, level=i["level"]))
+            lines.append("")
+            continue
+        if i["type"] == "list_item":
+            lines.extend(_format_paragraph(f"- {i['text']}", indent=6))
             lines.append("")
             continue
         para = i["text"]
