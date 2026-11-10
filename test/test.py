@@ -5,6 +5,7 @@ from io import StringIO
 from unittest.mock import patch
 
 from wik import info
+from wik import wik as wik_cli
 
 
 class FakeResp:
@@ -115,6 +116,13 @@ class FetchTest(unittest.TestCase):
         self.assertIn("CAST", output)
         self.assertIn("- Actor One as Role One", output)
         self.assertIn("- Actor Two as Role Two", output)
+
+
+class ArgumentsTest(unittest.TestCase):
+    @patch("sys.stdout", new_callable=StringIO)
+    def test_no_action_prints_help_with_usage_error(self, mock_stdout):
+        self.assertEqual(wik_cli.arguments([]), 2)
+        self.assertIn("usage", mock_stdout.getvalue().lower())
 
 
 if __name__ == '__main__':
