@@ -50,7 +50,7 @@ def arguments(argv=None):
 
     if not any([args.quick, args.info, args.search, args.rand]):
         parser.print_help()
-        return
+        return 2
 
     if args.quick:
         info.getSummary(args.quick, args.lang)
@@ -63,4 +63,4 @@ def arguments(argv=None):
 
 
 if __name__ == "__main__":
-    arguments()
+    sys.exit(arguments())
