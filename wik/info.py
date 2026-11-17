@@ -5,6 +5,7 @@ import textwrap
 import pydoc
 import re
 import shutil
+from pathlib import Path
 import hashlib
 
 from urllib.parse import quote
@@ -42,6 +43,7 @@ _DEFAULT_HEADERS = {
 }
 
 _cache_enabled = True
+_save_file = False
 
 
 def _use_tty():
@@ -187,6 +189,19 @@ def clear_cache():
             removed += 1
     return removed
 
+def set_save_enabled(enabled: bool):
+    global _save_file
+    _save_file = bool(enabled)
+
+def save_txt_file(lines: list[str], title: str) -> None:
+    sanitized_title = re.sub(r"\x1B[@-_][0-?]*[ -/]*[@-~]", "", title)
+    file_dir = Path.cwd() / f"{sanitized_title}.txt"
+    sanitized_text = re.sub(r"\x1B[@-_][0-?]*[ -/]*[@-~]", "", "\n".join(lines))
+    
+    with open(file_dir, 'w', encoding="utf-8") as file:
+        file.write(sanitized_text)
+
+
 # Maybe Future Use
 # def get_tags(d, params):
 #   if any((lambda x:b in x if a == 'class' else b == x)(d.attrs.get(a, [])) for a, b in params.get(d.name, {}).items()):
@@ -263,7 +278,11 @@ def getSummary(term, lang="en"):
             lines.extend(_format_paragraph(para))
             if idx != len(final_content) - 1:
                 lines.append("")
+        if _save_file:
+            lines.insert(0, "SUMMARY:\n")
+            save_txt_file(lines, lines[1])
         _emit(lines)
+    
 
 
 def getInfo(term, lang="en"):
@@ -338,7 +357,12 @@ def getInfo(term, lang="en"):
                     return
                 lines.extend(_format_paragraph(para))
                 lines.append("")
+        if _save_file:
+            lines.insert(0, "INFO:\n")
+            save_txt_file(lines, lines[1])
         _emit(lines, force_page=True)
+
+        
 
 
 def getRand(lang="en"):
@@ -422,11 +446,20 @@ def getRand(lang="en"):
             return
         lines.extend(_format_paragraph(para))
         lines.append("")
+
+    if _save_file:
+        lines.insert(0, "INFO (random):\n")
+        save_txt_file(lines, lines[1])
+
     _emit(lines, force_page=True)
+    
 
 
 # Search for Similar Articles
 def searchInfo(term, lang="en", called=False):
+    if _save_file:
+        print("WARNING: -d/--download not supported for -s/--search.")
+
     # https://en.wikipedia.org/w/index.php?fulltext=Search&search
     r = requests.get(
         "https://" + lang + ".wikipedia.org/w/index.php",
