@@ -15,6 +15,9 @@ def _build_parser():
     parser.add_argument("-i", "--info", help="Get info on any topic")
     parser.add_argument("-q", "--quick", help="Get the summary on any topic")
     parser.add_argument(
+        "-d", "--download", help="Saves info/summary in a .txt file", action="store_true"
+    )
+    parser.add_argument(
         "-l",
         "--lang",
         help="Get info in your native language (default english)",
@@ -47,11 +50,13 @@ def arguments(argv=None):
         removed = info.clear_cache()
         print(f"Cleared {removed} cached page(s).")
         return
+    if args.download:
+        info.set_save_enabled(True)
 
     if not any([args.quick, args.info, args.search, args.rand]):
         parser.print_help()
         return
-
+    
     if args.quick:
         info.getSummary(args.quick, args.lang)
     if args.info:
@@ -60,6 +65,7 @@ def arguments(argv=None):
         info.searchInfo(args.search, args.lang)
     if args.rand:
         info.getRand(args.lang)
+
 
 
 if __name__ == "__main__":
