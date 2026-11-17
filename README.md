@@ -53,7 +53,7 @@ pip install wik
 Using WIK is simple.
 
 ```
-usage: wik [-h] [-s SEARCH] [-i INFO] [-q QUICK] [-l LANG] [-x] [--no-cache]
+usage: wik [-h] [-s SEARCH] [-i INFO] [-q QUICK] [-d] [-l LANG] [-x] [--no-cache]
            [--clear-cache]
 
 optional arguments:
@@ -63,6 +63,7 @@ optional arguments:
   -i INFO, --info INFO  Get info on any topic
   -q QUICK, --quick QUICK
                         Get the summary on any topic
+  -d, --download        Saves info/summary in a .txt file
   -l LANG, --lang LANG  Get info in your native language (default english)
   -x, --rand            Get random Wikipedia article
   --no-cache            Disable on-disk cache for this run
